@@ -1,0 +1,61 @@
+{% if request.user.is_authenticated %}
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse navbar-left">
+          <ul class="nav navbar-nav navbar-right">
+              <a class="navbar-brand" href="{% url 'dashboard' %}">Daily budget</a>
+              <a class="navbar-brand" href="{% url 'bills_dashboard' %}">Bills</a>
+              <a class="navbar-brand" href="{% url 'income_dashboard' %}">Income</a>
+          </ul>
+        </div><!--/.navbar-collapse -->
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav navbar-right">
+              <a class="navbar-brand" href="/accounts/logout">Logout</a>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+
+        <div class="navbar-collapse collapse">
+
+        </div><!--/.navbar-collapse -->
+    </div>
+
+{% else %}
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Build Your Tomorrow</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav navbar-right">
+              <a class="navbar-brand pull-right" href="/accounts/login">Login</a>
+              <a class="navbar-brand pull-right" href="/accounts/register">Register</a>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+
+        <div class="navbar-collapse collapse">
+
+        </div><!--/.navbar-collapse -->
+    </div>
+{% endif %}
+
+
+
+
+
+

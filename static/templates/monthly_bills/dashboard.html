@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content123 %}
+
+<style>
+a:link {color:black;}    /* unvisited link */
+a:visited {color:black;} /* visited link */
+a:hover {color:black;}   /* mouse over link */
+a:active {color:black;}  /* selected link */
+
+.add {
+    height:90px;
+    font-size:50px;
+    width:100%
+    }
+
+.bill {
+    font-size:20px;
+    height:55px;
+    }
+
+a.delete:hover {
+    color:red;
+    }
+
+    a:link {color:black; text-decoration: none;}    /* unvisited link */
+    a:visited {color:black; text-decoration: none;} /* visited link */
+    a:hover {color:grey; text-decoration: none;}   /* mouse over link */
+    a:active {color:black; text-decoration: none;}  /* selected link */
+
+</style>
+
+<div class="container">
+
+    {% if messages %}
+    <div class="col-md-8 col-md-offset-2 alert alert-info" style="text-align: center">
+    {% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row col-md-8"><br>
+        <a href='/bills/add' class="pull-right btn btn-primary add">Add bill</a>
+    </div>
+</div><br>
+
+<div class="container">
+    <div class="row col-md-8">
+
+        {% if bills_query %}
+        <table class="table">
+
+            <thead style="font-size: 22px">
+                <tr>
+                    <td style="color: #A9A9A9" width="25%">Name</td>
+                    <td style="color: #A9A9A9" width="52%"><center>Amount</center></td>
+                </tr>
+            </thead>
+
+            <tbody style="font-size: 15px; color: #778589;">
+            {% for name in bills_query %}
+            <tr class="bill"><td style="vertical-align:middle;"><a href="{% url 'monthly_bill_edit' name.id %}">{{ name.description }}</a></td>
+                <td style="vertical-align:middle;"><a href="{% url 'monthly_bill_edit' name.id %}"><center>{{ name.amount }}</center></a></td>
+                <td style="text-align: right; vertical-align:middle; font-size: 15px;"><a href="{% url 'monthly_delete' name.id %}" class="delete">delete</a></td></tr>
+            {% endfor %}
+            <tr>
+                <td style="font-size: 20px">Total</td>
+                <td style="font-size: 20px"><center>{{ var }}</center></td>
+                <td></td>
+            </tr>
+            </tbody>
+
+        </table>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+

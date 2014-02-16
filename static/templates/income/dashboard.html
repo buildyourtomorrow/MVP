@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block content123 %}
+
+<style>
+    td {
+        font-size: 20px;
+        color: black;
+        height: 70px;
+        padding:5px;
+    }
+    .edit {
+        text-align:right;
+        font-size: 15px;
+    }
+    .add {
+        height:90px;
+        font-size:50px;
+        width:100%
+    }
+    .edit1 {
+        height:90px;
+        font-size: 50px;
+        width:100%
+    }
+    a.delete:hover {
+        color:red;
+    }
+    a.edit1:link {color:black;}
+    a.edit1:visited {color:black;}
+    a.edit1:hover {color:white;}
+
+    a.add:link {color:black;}
+    a.add:visited {color:black;}
+    a.add:hover {color:white;}
+
+    a:link {color:grey; text-decoration: none;}    /* unvisited link */
+    a:visited {color:grey; text-decoration: none;} /* visited link */
+    a:hover {color:black; text-decoration: none;}   /* mouse over link */
+    a:active {color:grey; text-decoration: none;}  /* selected link */
+
+</style>
+
+
+<div class="container">
+
+    {% if messages %}
+    <div class="col-md-8 col-md-offset-2 alert alert-info" style="text-align: center">
+    {% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row col-md-8">
+        <h1>
+
+            {% if income == False %}
+            <a href='{% url "add" %}' class="pull-right btn btn-primary add">Add income</a>
+            {% endif %}
+
+        </h1>
+
+        <table class="table">
+
+            {% if income %}
+            <a href='{% url "income_edit" income.id %}' class="pull-right btn btn-primary edit1">Edit income</a>
+
+            <tbody>
+
+                <tr>
+                    <td width="30%" style="vertical-align:middle; color:grey;">Description</td>
+                    <td width="30%" style="vertical-align:middle;"><center>{{ income.description }}</center></td>
+                    <td width="30%" style="vertical-align:middle;" class="edit">
+                        <a href="{% url 'income_edit' income.id %}">edit</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="30%" style="vertical-align:middle; color:grey;">Amount</td>
+                    <td width="30%" style="vertical-align:middle;"><center>{{ income.amount }}</center></td>
+                    <td width="30%" style="vertical-align:middle;" class="edit">
+                        <a href="{% url 'income_edit' income.id %}">edit</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="30%" style="vertical-align:middle; color:grey;">Frequency</td>
+                    <td width="30%" style="vertical-align:middle;"><center>{{ frequency2 }}</center></td>
+                    <td width="30%" style="vertical-align:middle;" class="edit">
+                        <a href="{% url 'income_edit' income.id %}">edit</a>
+                    </td>
+                </tr>
+                <tr>
+                    {% if paychecks == False%}
+
+                    {% endif %}
+                    {% if paychecks != False %}
+                    <td rowspan="6" style="vertical-align: middle; color:grey;">Pay dates</td>
+                    {% for check in paychecks %}
+                    <tr>
+                        <td width="30%" style="vertical-align:middle;"><center>{{ check.pay_date|date:"SHORT_DATE_FORMAT" }}</center></td>
+                        <td style="vertical-align:middle;" class="edit">
+                            <a href="{% url 'paycheck_edit' check.id %}">edit</a> //
+                            <a href="{% url 'income_delete' check.id %}" class="delete">delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tr>
+
+            </tbody>
+
+            {% endif %}
+
+        </table>
+    </div>
+</div><br>
+
+
+{% endblock %}
+
+

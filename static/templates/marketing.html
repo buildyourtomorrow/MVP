@@ -1,0 +1,39 @@
+{% extends 'jumbotron.html' %}
+
+{% block marketing %}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-4">
+            <h2>
+                My why
+            </h2>
+            <p>
+                While in finance, I encountered a group of people that managed their finances well and a different group of people that didn't.  The group that managed their finances well were disciplined, patient, consistent, and had a plan.  The group that was in trouble mostly looked and sounded like me.
+            </p>
+            <a class="btn btn-default" href="/accounts/register" style="display:block;">GO</a>
+        </div>
+
+        <div class="col-lg-4">
+            <h2>
+                How you can help?
+            </h2>
+
+            <p>
+                In order to get this off the ground, I'm going to need lots of support.  What kind?  Every kind.  You can help by either making a small donation (click Donate next door), telling me I'm not crazy if you ever see me at Baruch or out and about, or by telling someone else about what I'm pursuing.  In any case, muchas gracias!
+            </p>
+            <a class="btn btn-default" href="/accounts/register" style="display:block;">GO</a>
+        </div>
+        <div>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="RPNFL5NZSSEM2">
+                <input type="image" src="http://give2asia.org/wp-content/uploads/2012/12/Donate.jpg" class="img-responsive" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock%}

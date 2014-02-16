@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content123 %}
+
+{% if messages %}
+    <div class="col-md-8 col-md-offset-2 alert alert-info" style="text-align: center">
+    {% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+    </div>
+{% endif %}
+
+<div class="container">
+
+    <div class="col-lg-4 video-container pull-right">
+        <div class="row">
+            <iframe class="pull-right" width="195" height="125" src="//www.youtube.com/embed/g-jwWYX7Jlo?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
+        </div><br><br>
+        <div class="row">
+            <iframe class="pull-right" width="195" height="125" src="//www.youtube.com/embed/XkziAM_ZyDM?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+

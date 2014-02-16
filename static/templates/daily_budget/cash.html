@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content123 %}
+
+<div class="container">
+    <div class="row col-md-4">
+        <form method="post" action="">{% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
