@@ -18,6 +18,8 @@ def dashboard(request):
     for bill in bills_query:
         var = var + bill['amount']
 
+    daily_period_generator(user)
+
     return render_to_response('monthly_bills/dashboard.html', locals(), context_instance=RequestContext(request))
 
 
@@ -47,7 +49,6 @@ def add(request):
                                      monthly_total=var,
                                      weekly=weekly,
                                      daily=daily)
-            daily_period_generator(user)
 
             return HttpResponseRedirect('/bills/')
 
@@ -86,7 +87,6 @@ def edit(request, u):
                                      monthly_total=var,
                                      weekly=weekly,
                                      daily=daily)
-            daily_period_generator(user)
 
             return HttpResponseRedirect('/bills/')
 
@@ -118,7 +118,6 @@ def delete(request, u):
                                  monthly_total=var,
                                  weekly=weekly,
                                  daily=daily)
-    daily_period_generator(user)
 
     return HttpResponseRedirect('/bills/')
 

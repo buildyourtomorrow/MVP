@@ -10,7 +10,7 @@ class DailyExpense(models.Model):
     to_transaction_sum = models.DecimalField(max_digits=15, decimal_places=8, default=0.00, blank=True)
 
     def __unicode__(self):
-        return u'%s %s %s %s' % (self.amount, self.date, self.description, self.to_transaction_sum)
+        return u'%s %s %s %s %s' % (self.user, self.amount, self.date, self.description, self.to_transaction_sum)
 
 
 class TotalDailyExpenses(models.Model):
@@ -19,7 +19,7 @@ class TotalDailyExpenses(models.Model):
     date = models.DateField()
 
     def __unicode__(self):
-        return u'%s %s' % (self.amount, self.date)
+        return u'%s %s %s' % (self.user, self.amount, self.date)
 
 
 class BeginningDailyBudget(models.Model):
@@ -28,7 +28,7 @@ class BeginningDailyBudget(models.Model):
     date = models.DateField()
 
     def __unicode__(self):
-        return u'%s %s' % (self.beginning_amount, self.date)
+        return u'%s %s %s' % (self.user, self.beginning_amount, self.date)
 
 
 class EndingDailyBudget(models.Model):
@@ -37,7 +37,7 @@ class EndingDailyBudget(models.Model):
     date = models.DateField()
 
     def __unicode__(self):
-        return u'%s %s' % (self.beginning_amount, self.date)
+        return u'%s %s %s' % (self.user, self.beginning_amount, self.date)
 
 
 class BeginningPeriodBudget(models.Model):
@@ -46,7 +46,7 @@ class BeginningPeriodBudget(models.Model):
     date = models.DateField()
 
     def __unicode__(self):
-        return u'%s %s' % (self.beginning_amount, self.date)
+        return u'%s %s %s' % (self.user, self.beginning_amount, self.date)
 
 
 class EndingPeriodBudget(models.Model):
@@ -55,7 +55,7 @@ class EndingPeriodBudget(models.Model):
     date = models.DateField()
 
     def __unicode__(self):
-        return u'%s %s' % (self.ending_amount, self.date)
+        return u'%s %s %s' % (self.user, self.ending_amount, self.date)
 
 
 class Cash(models.Model):
@@ -64,7 +64,7 @@ class Cash(models.Model):
     date = models.DateField()
 
     def __unicode__(self):
-        return u'%s %s' % (self.amount, self.date)
+        return u'%s %s %s' % (self.user, self.amount, self.date)
 
 
 class PeriodBudget(models.Model):
@@ -74,7 +74,7 @@ class PeriodBudget(models.Model):
     date = models.DateField()
 
     def __unicode__(self):
-        return u'%s %s %s' % (self.beginning_amount, self.ending_amount, self.date)
+        return u'%s %s %s %s' % (self.user, self.beginning_amount, self.ending_amount, self.date)
 
 
 class DailyBudget(models.Model):
@@ -84,7 +84,7 @@ class DailyBudget(models.Model):
     date = models.DateField()
 
     def __unicode__(self):
-        return u'%s %s %s' % (self.beginning_amount, self.ending_amount, self.date)
+        return u'%s %s %s %s' % (self.user, self.beginning_amount, self.ending_amount, self.date)
 
 
 class PeriodExpense(models.Model):
@@ -93,7 +93,7 @@ class PeriodExpense(models.Model):
     date = models.DateField()
 
     def __unicode__(self):
-        return u'%s %s' % (self.amount, self.date)
+        return u'%s %s %s' % (self.user, self.amount, self.date)
 
 
 class Transaction(models.Model):
@@ -106,7 +106,7 @@ class Transaction(models.Model):
     daily_expense_id = models.DecimalField(max_digits=15, decimal_places=8, default=0.00)
 
     def __unicode__(self):
-        return u'%s %s' % (self.amount, self.date)
+        return u'%s %s %s' % (self.user, self.amount, self.date)
 
 
 class DatePicker(models.Model):
@@ -114,7 +114,7 @@ class DatePicker(models.Model):
     date = models.DateField()
 
     def __unicode__(self):
-        return u'%s' % self.date
+        return u'%s %s' % (self.user, self.date)
 
 
 

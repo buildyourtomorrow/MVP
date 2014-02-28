@@ -8,7 +8,7 @@ class Bill(models.Model):
     amount = models.DecimalField(max_digits=10, default=0.00, decimal_places=0)
 
     def __unicode__(self):
-        return u'%s %s %s %s %s' % (self.description, self.amount, self.monthly_total, self.weekly, self.daily)
+        return u'%s %s %s' % (self.user, self.description, self.amount)
 
 
 class BillTotal(models.Model):
@@ -18,5 +18,5 @@ class BillTotal(models.Model):
     daily = models.DecimalField(max_digits=10, default=0.00, decimal_places=0)
 
     def __unicode__(self):
-        return u'%s %s %s' % (self.monthly_total, self.weekly, self.daily)
+        return u'%s %s %s %s' % (self.user, self.monthly_total, self.weekly, self.daily)
 

@@ -14,7 +14,7 @@ def daily_period_generator(user):
         first_paycheck = Paycheck.objects.filter(user_id=user).order_by('pay_date')[0]
         d = first_paycheck.pay_date
         y = timedelta(days=0)
-        for day in range(365):
+        for day in range(5):
             d = d + y
             beginning_daily_budget_function(user, d)
             ending_daily_budget_function(user, d)

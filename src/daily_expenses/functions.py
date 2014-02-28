@@ -165,6 +165,9 @@ def create_transaction_function(user, date1):
                                    date=date1,
                                    daily_expense_id=expense['id'])
     transactions = Transaction.objects.filter(user_id=user, date=date1)
+
+    for transaction in transactions:
+        transaction.daily_expense_id
     return transactions
 
 

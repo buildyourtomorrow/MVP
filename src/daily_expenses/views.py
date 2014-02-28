@@ -5,11 +5,10 @@ from monthly_bills.models import Bill, BillTotal
 from monthly_bills.functions import *
 from django.contrib import messages
 from .functions import *
-from .forms import CashForm, DailyExpenseForm, DatePickerForm, EditExpenseForm
+from .forms import DailyExpenseForm, DatePickerForm, EditExpenseForm
 
 
 now = date.today()
-#now1 = now1.replace(day=20)
 
 @login_required()
 def dashboard(request):
@@ -56,6 +55,9 @@ def dashboard(request):
             daily_expenses = DailyExpense.objects.filter(user_id=user, date=now)
             next_paycheck = get_very_next_paycheck(user, now)
             get_paychecks_to_show = get_all_paychecks_to_show(user, now)
+
+            for transaction in transactions:
+                print transaction.daily_expense_id
 
             return render_to_response('daily_budget/dashboard.html', locals(), context_instance=RequestContext(request))
 
@@ -111,14 +113,6 @@ def expense(request):
     form = DailyExpenseForm
 
     return render_to_response('daily_budget/expense.html', locals(), context_instance=RequestContext(request))
-
-
-@login_required()
-def cash(request):
-
-    form = CashForm
-
-    return render_to_response('daily_budget/cash.html', locals(), context_instance=RequestContext(request))
 
 
 @login_required()

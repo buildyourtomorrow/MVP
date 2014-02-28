@@ -1,8 +1,21 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load i18n %}
 
 {% block content123 %}
 
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+
+{% bootstrap_css %} {% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
+{# Display a form #}
+
+
 <div class="container">
+<div class="row col-md-4">
 
 {% if messages %}
     <div class="col-md-8 col-md-offset-2 alert alert-info" style="text-align: center">
@@ -12,14 +25,19 @@
     </div>
 {% endif %}
 
-    <div class="row col-md-4">
-        <form method="post" action="">{% csrf_token %}
-            {{form.as_p}}
-            <a href="{% url 'dashboard' %}" class="btn btn-primary">forget it</a>
-            <input type="submit" class="btn btn-warning">
+    <div class="row col-md-12">
+        <form action="" method="post" class="form datepicker">
+
+        {% csrf_token %} {% bootstrap_form form %} {% buttons %}
+
+        <a href="{% url 'dashboard' %}" class="btn btn-primary">forget it</a>
+        <input type="submit" class="btn btn-warning">
+
+        {% endbuttons %}
+
         </form>
     </div>
-
+</div>
 </div>
 
 {% endblock %}

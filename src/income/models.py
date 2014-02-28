@@ -13,11 +13,12 @@ class Paycheck(models.Model):
         ordering = ['pay_date']
 
     def __unicode__(self):
-        return u'%s %s %s %s %s' % (self.description,
-                                    self.amount,
-                                    self.pay_date,
-                                    self.id,
-                                    self.time_till_next)
+        return u'%s %s %s %s %s %s' % (self.user,
+                                       self.description,
+                                       self.amount,
+                                       self.pay_date,
+                                       self.id,
+                                       self.time_till_next)
 
 
 class Income(models.Model):
@@ -35,10 +36,11 @@ class Income(models.Model):
     next_paycheck = models.DateField()
 
     def __unicode__(self):
-        return u'%s %s %s %s' % (self.description,
-                                 self.amount,
-                                 self.frequency,
-                                 self.next_paycheck)
+        return u'%s %s %s %s %s' % (self.user,
+                                    self.description,
+                                    self.amount,
+                                    self.frequency,
+                                    self.next_paycheck)
 
 
 

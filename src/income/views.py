@@ -17,7 +17,7 @@ def dashboard(request):
     income = get_income_funtion(user)
     frequency2 = get_frequency_function(user)
     till_next_paycheck_function(user, now)
-
+    daily_period_generator(user)
     return render_to_response('income/dashboard.html', locals(), context_instance=RequestContext(request))
 
 
@@ -35,7 +35,6 @@ def paycheck_edit(request, u):
             d.amount = form.cleaned_data['amount']
             d.pay_date = form.cleaned_data['pay_date']
             d.save()
-            daily_period_generator(user)
 
             return HttpResponseRedirect('/income/')
 
@@ -54,8 +53,6 @@ def delete(request, u):
     except:
         pass
 
-    daily_period_generator(user)
-
     return HttpResponseRedirect('/income/')
 
 
@@ -71,36 +68,31 @@ def income_edit(request, u):
             object.description = form.cleaned_data['description']
             object.amount = form.cleaned_data['amount']
             object.frequency = form.cleaned_data['frequency']
-            object.pay_date = form.cleaned_data['start_date']
+            object.pay_date = form.cleaned_data['next_paycheck']
             object.save()
 
             if object.frequency == "52":
-                weekly_paycheck_create_function(user, now, object.pay_date)
-                daily_period_generator(user)
+                weekly_paycheck_create_function(user, now, object.pay_date)                
 
                 return HttpResponseRedirect('/income/')
 
             elif object.frequency == "26":
-                biweekly_paycheck_create_function(user, now, object.pay_date)
-                daily_period_generator(user)
+                biweekly_paycheck_create_function(user, now, object.pay_date)                
 
                 return HttpResponseRedirect('/income/')
 
             elif object.frequency == "24":
                 if now.day < 15:
-                    bimonthly_paycheck_create_function1(user, now, object.pay_date)
-                    daily_period_generator(user)
+                    bimonthly_paycheck_create_function1(user, now, object.pay_date)                    
 
                     return HttpResponseRedirect('/income/')
                 else:
                     bimonthly_paycheck_create_function(user, now, object.pay_date)
-                    daily_period_generator(user)
 
                     return HttpResponseRedirect('/income/')
 
             elif object.frequency == "12":
-                monthly_paycheck_create_function(user, now, object.pay_date)
-                daily_period_generator(user)
+                monthly_paycheck_create_function(user, now, object.pay_date)                
 
                 return HttpResponseRedirect('/income/')
 
@@ -128,31 +120,26 @@ def add(request):
 
             if frequency1 == '52':
                 weekly_paycheck_create_function(user, now, next_paycheck)
-                daily_period_generator(user)
 
                 return HttpResponseRedirect('/income/')
 
             elif frequency1 == '26':
                 biweekly_paycheck_create_function(user, now, next_paycheck)
-                daily_period_generator(user)
 
                 return HttpResponseRedirect('/income/')
 
             elif frequency1 == "24":
                 if now.day < 15:
                     bimonthly_paycheck_create_function1(user, now, next_paycheck)
-                    daily_period_generator(user)
 
                     return HttpResponseRedirect('/income/')
                 else:
                     bimonthly_paycheck_create_function(user, now, next_paycheck)
-                    daily_period_generator(user)
 
                     return HttpResponseRedirect('/income/')
 
             elif frequency1 == "12":
                 monthly_paycheck_create_function(user, now, next_paycheck)
-                daily_period_generator(user)
 
                 return HttpResponseRedirect('/income/')
 
@@ -168,7 +155,7 @@ def delete_income(request):
     Income.objects.get(user_id=user).delete()
     Paycheck.objects.filter(user_id=user).delete()
     till_next_paycheck_function(user, now)
-    daily_period_generator(user)
+    
     return HttpResponseRedirect('/income/')
 
 
@@ -194,7 +181,6 @@ def frequency(request):
                 income.start_date = next_paycheck
                 days_in_week = datetime.timedelta(days=7)
 
-            daily_period_generator(user)
             return HttpResponseRedirect('/income/')
 
         if income.start_date == now:
@@ -203,8 +189,7 @@ def frequency(request):
                                     amount=income.amount,
                                     pay_date=income.start_date,
                                     active="True")
-
-            daily_period_generator(user)
+            
             return HttpResponseRedirect('/income/')
 
         if income.start_date > now:
